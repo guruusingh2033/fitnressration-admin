@@ -1,0 +1,20 @@
+<div class="--top">
+	<button class="-button delete" ng-click="$ctrl.delete()">Delete</button>
+	<a class="-button add" href="/products/portions/add">Add</a>
+</div>
+<table class="-entry-list">
+	<tr>
+		<th><input ng-model="$ctrl.allSelected" type="checkbox"></th>
+		<th>Icon</th>
+		<th>Name</th>
+		<th>Description</th>
+		<th></th>
+	</tr>
+	<tr ng-repeat="portion in $ctrl.portions">
+		<td class="select"><input ng-model="$ctrl.selected[portion._id._str]" type="checkbox"></td>
+		<td><img src="{{portion.icon | image}}"></td>
+		<td>{{portion.name}}</td>
+		<td>{{portion.description}}</td>
+		<td class="edit"><a class="edit" href="/products/portions/{{portion._id._str}}/edit">Edit</a></td>
+	</tr>
+</table>

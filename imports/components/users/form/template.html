@@ -1,0 +1,123 @@
+<form ng-submit="$ctrl.save(); false">
+	<div class="-group image">
+		<div class="-field">
+			<label>Primary Image</label>
+			<img src="{{$ctrl.meal.primaryImage}}">
+			<input upload="$ctrl.meal.primaryImage = url" type="file">
+		</div>
+		<div class="-field">
+			<label>Secondary Image</label>
+			<img src="{{$ctrl.meal.secondaryImage}}">
+			<input upload="$ctrl.meal.secondaryImage = url" type="file">
+		</div>
+	</div>
+
+	<div class="-group details">
+		<div class="-field name">
+			<label>Name</label>
+			<input class="-input" type="text" name="name" ng-model="$ctrl.meal.name" required>
+		</div>
+		<div class="-group meal-plan-portion">
+			<div class="-field meal-plan">
+				<label>Meal Plan</label>
+				<select class="-input" ng-model="$ctrl.meal.mealPlan._str" required>
+					<option></option>
+					<option ng-repeat="mealPlan in $ctrl.mealPlans" value="{{mealPlan._id._str}}">{{mealPlan.name}}</option>
+				</select>
+			</div>
+			<div class="-field portion">
+				<label>Portion</label>
+				<select class="-input" ng-model="$ctrl.meal.portion._str" required>
+					<option></option>
+					<option ng-repeat="portion in $ctrl.portions" value="{{portion._id._str}}">{{portion.name}}</option>
+				</select>
+			</div>
+		</div>
+		<div class="-field sides">
+			<label>Sides</label>
+			<div class="-inputs">
+				<select class="-input" ng-model="$ctrl.meal.sides[0]._str">
+					<option></option>
+					<option ng-repeat="side in $ctrl.sides" value="{{side._id._str}}">{{side.name}}</option>
+				</select>
+				<select class="-input" ng-model="$ctrl.meal.sides[1]._str">
+					<option></option>
+					<option ng-repeat="side in $ctrl.sides" value="{{side._id._str}}">{{side.name}}</option>
+				</select>
+			</div>
+		</div>
+		<div class="-field grade">
+			<label>Grade</label>
+			<select class="-input" ng-model="$ctrl.meal.grade" required>
+				<option></option>
+				<option value="basic">Basic</option>
+				<option value="premium">Premium</option>
+			</select>
+			<input class="-input price" type="text" ng-model="$ctrl.meal.price" ng-if="$ctrl.meal.grade == 'premium'" placeholder="Price" required>
+		</div>
+		<div class="-field sku">
+			<label>SKU</label>
+			<input type="text" ng-model="$ctrl.meal.sku">
+		</div>
+		<div class="-field description">
+			<label>Description</label>
+			<textarea class="-input" ng-model="$ctrl.meal.description"></textarea>
+		</div>
+	</div>
+	<div class="-section ingredients">
+		<h2>Ingredients</h2>
+		<div class="-field main">
+			<label>Main</label>
+			<ul>
+				<li ng-repeat="ingredient in $ctrl.mainIngredients">
+					<input type="radio" value="{{ingredient._id._str}}" name="mainIngredient" ng-model="$ctrl.meal.mainIngredient._str" required> <label>{{ingredient.name}}</label>
+				</li>
+			</ul>
+		</div>
+		<div class="-field allergens">
+			<label>Allergens</label>
+			<ul>
+				<li ng-repeat="ingredient in $ctrl.allergens">
+					<input type="checkbox" ng-model="$ctrl.allergenSelection[ingredient._id._str]"> <label>{{ingredient.name}}</label>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="-section nutrients">
+		<div class="-section macro">
+			<h2>Macro Nutrients</h2>
+			<div class="-field">
+				<label>Calories</label>
+				<input class="-input" type="text" ng-model="$ctrl.meal.nutritionFacts.calories" required> kcal
+			</div>
+			<div class="-field">
+				<label>Carbohydrates</label>
+				<input class="-input" type="text" ng-model="$ctrl.meal.nutritionFacts.carbohydrates" required> g
+			</div>
+			<div class="-field">
+				<label>Fats</label>
+				<input class="-input" type="text" ng-model="$ctrl.meal.nutritionFacts.fat" required> g
+			</div>
+			<div class="-field">
+				<label>Protein</label>
+				<input class="-input" type="text" ng-model="$ctrl.meal.nutritionFacts.protein" required> g
+			</div>
+		</div>
+		<div class="-section micro">
+			<h2>Micro Nutrients</h2>
+			<div class="-field">
+				<label>Fibre</label>
+				<input class="-input" type="text" ng-model="$ctrl.meal.nutritionFacts.fiber" required> g
+			</div>
+			<div class="-field">
+				<label>Sodium</label>
+				<input class="-input" type="text" ng-model="$ctrl.meal.nutritionFacts.sodium" required> mg
+			</div>
+			<div class="-field">
+				<label>Sugar</label>
+				<input class="-input" type="text" ng-model="$ctrl.meal.nutritionFacts.sugar" required> g
+			</div>
+		</div>
+	</div>
+	<button class="-button save">Save</button>
+</form>

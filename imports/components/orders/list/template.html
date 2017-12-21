@@ -1,0 +1,88 @@
+<div class="filters">
+	<div class="filter">
+		<input ng-model="$ctrl.filters.search" ng-model-options="{ debounce: 600 }" type="text" placeholder="Search">
+		<button ng-click="$ctrl.filters.search = ''">Clear</button>
+	</div>
+	<div class="filter">
+		<ul class="values">
+			<li ng-class="{active:$ctrl.filters.time == 'all'}"><label ng-click="$ctrl.filters.time = 'all'">All</label></li>
+			<li ng-class="{active:$ctrl.filters.time == 'day'}"><label ng-click="$ctrl.filters.time = 'day'">Day:</label> <input type="date" ng-model="$ctrl.day"></li>
+			<li ng-class="{active:$ctrl.filters.time == 'week'}"><label ng-click="$ctrl.filters.time = 'week'">Week:</label> <input type="week" ng-model="$ctrl.week"></li>
+			<li ng-class="{active:$ctrl.filters.time == 'month'}"><label ng-click="$ctrl.filters.time = 'month'">Month:</label> <input type="month" ng-model="$ctrl.month"></li>
+		</ul>
+	</div>
+	<div class="filter">
+		<ul class="values">
+			<li ng-class="{active:$ctrl.filters.flagged == false}" ng-click="$ctrl.filters.flagged = false"><label>All</label></li>
+			<li ng-class="{active:$ctrl.filters.flagged == true}" ng-click="$ctrl.filters.flagged = true"><label>Flagged</label></li>
+		</ul>
+	</div>
+</div>
+<div class="-group export">
+	<button class="-button" ng-click="$ctrl.printInvoices()">Print Invoices</button>
+	<button class="-button" ng-click="$ctrl.export()">Export</button>
+	<a ng-if="!$ctrl.userId" class="-button add" href="/orders/add">Add</a>
+</div>
+<table>
+	<tr>
+		<th><input ng-model="$ctrl.allSelected" type="checkbox"></th>
+		<th ng-click="$ctrl.toggleSort('status')">Status</th>
+		<th ng-click="$ctrl.toggleSort('number')">Order</th>
+		<th ng-if="!$ctrl.userId" ng-click="$ctrl.toggleSort('customer')">Customer</th>
+		<th ng-click="$ctrl.toggleSort('fulfillment')">Fulfillment</th>
+		<th ng-click="$ctrl.toggleSort('bundles.0.mealPlan.name')">Meal Plan</th>
+		<th ng-click="$ctrl.toggleSort('bundles.0.portion.name')">Portion</th>
+		<th ng-click="$ctrl.toggleSort('bundles.0.type.name')">Bundle Type</th>
+		<th ng-click="$ctrl.toggleSort('addOnSelections.0.addOn.name')">Add-ons</th>
+		<th ng-click="$ctrl.toggleSort('total')">Total</th>
+		<!-- <th>State</th> -->
+		<th></th>
+	</tr>
+	<tr ng-repeat="order in $ctrl.orders">
+		<td class="select"><input ng-model="$ctrl.selected[order._id._str]" type="checkbox"></td>
+		<td class="status {{order.state == 'failed' ? 'failed' : (order.flagged ? 'flagged' : 'not-flagged')}}">{{order.state == 'failed' ? 'Failed' : (order.flagged ? 'Flagged' : 'Not Flagged')}}</td>
+		<td>#{{order.number}}</td>
+		<td ng-if="!$ctrl.userId">{{order.deliveryOptions.firstName}} {{order.deliveryOptions.surname}}</td>
+		<td class="fulfillment">
+			<div class="attribute due">
+				<label>Due:</label>
+				<span class="value">
+					<div>{{order.deliveryOptions.date}}</div>
+					<div>{{$ctrl.timeDisplay(order.deliveryOptions.time)}}</div>
+				</span>
+			</div>
+			<span ng-if="order.deliveryOptions.selfCollection" class="self-collection">Self-collection</span>
+			<div ng-if="!order.deliveryOptions.selfCollection" class="delivery-to attribute">
+				<label>Delivery to:</label>
+				<span class="value">
+					{{order.deliveryOptions.address}}<br>
+					{{order.deliveryOptions.postalCode}}
+				</span>
+			</div>
+		</td>
+		<td class="meal-plans">
+			<ul>
+				<li ng-repeat="bundle in order.bundles">{{bundle.mealPlan.name}}</li>
+			</ul>
+		</td>
+		<td class="portions">
+			<ul>
+				<li ng-repeat="bundle in order.bundles">{{bundle.portion.name}}</li>
+			</ul>
+		</td>
+		<td class="bundle-types">
+			<ul>
+				<li ng-repeat="bundle in order.bundles">{{bundle.type.name}}</li>
+			</ul>
+		</td>
+		<td class="add-ons">
+			<ul>
+				<li ng-repeat="addOnSelection in order.addOnSelections"><div>{{addOnSelection.addOn.name}}</div> <div>{{addOnSelection.variant}}</div></li>
+			</ul>
+		</td>
+		<td>{{order.total | currency}}</td>
+		<!-- <td>{{order.createdAt | date:'d MMM yyyy h:mma'}}</td> -->
+		<!-- <td>{{order.state}}</td> -->
+		<td class="view"><a href="/orders/{{order._id._str}}">View</a></td>
+	</tr>
+</table>

@@ -1,0 +1,97 @@
+<div ng-if="$ctrl.loading">
+	Loading...
+</div>
+<div ng-if="!$ctrl.loading">
+	<ul class="view">
+		<li ng-class="{active:$ctrl.timeView == 'day'}" ng-click="$ctrl.timeView = 'day'; false"><a href="#">Day</a></li>
+		<li ng-class="{active:$ctrl.timeView == 'month'}" ng-click="$ctrl.timeView = 'month'; false"><a href="#">Month</a></li>
+	</ul>
+	<div class="month-view" ng-if="$ctrl.timeView == 'month'">
+		<select ng-model="$ctrl.mealPlanFilter">
+			<option ng-repeat="mealPlan in $ctrl.mealPlans" value="{{mealPlan._id._str}}">{{mealPlan.name}}</option>
+		</select>
+		<select ng-model="$ctrl.portionFilter">
+			<option ng-repeat="portion in $`ctrl.portions" value="{{portion._id._str}}">{{portion.name}}</option>
+		</select>
+		<div class="--scroll-view">
+			<table>
+				<tr>
+					<th>Product Name</th>
+					<th>Total</th>
+					<th ng-repeat="day in $ctrl.days">
+						{{day.getDate()}} {{$ctrl.monthName(day.getMonth()).substr(0, 3)}}
+					</th>
+				</tr>
+				<tr ng-repeat="meal in $ctrl.meals">
+					<td class="name"><div>{{meal.name}}</div></td>
+					<td>{{$ctrl.stockTotal(meal)}}</td>
+					<td ng-repeat="day in $ctrl.days">
+						{{$ctrl.stockCalculator(meal).forDate(day).stock}}
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="day-view" ng-if="$ctrl.timeView == 'day'">
+		<ul class="tabs">
+			<li ng-class="{active:$ctrl.view == 'overview'}"><a href="/inventory/status/overview">Overview</a></li>
+			<li ng-if="!$ctrl.pastDay()" ng-class="{active:$ctrl.view == 'adjustment'}"><a href="/inventory/status/adjustment">Adjustment</a></li>
+			<li ng-if="!$ctrl.pastDay()" ng-class="{active:$ctrl.view == 'nonSales'}"><a href="/inventory/status/non-sales">Non-sales</a></li>
+			<li ng-if="!$ctrl.pastDay()" ng-class="{active:$ctrl.view == 'restock'}"><a href="/inventory/status/restock">Restock</a></li>
+		</ul>
+		<div class="--top">
+			<input class="search" type="text" placeholder="Search" ng-model="$ctrl.filter">
+			<input type="date" ng-model="$ctrl.date">
+			<button class="-button" ng-click="$ctrl.export()">Export</button>
+		</div>
+		<table ng-if="$ctrl.view == 'overview'">
+			<tr>
+				<th>Product Name</th>
+				<th>Meal Plan</th>
+				<th>Portion</th>
+				<th>SKU</th>
+				<th>Initial</th>
+				<th>Sales</th>
+				<th>Non-sales</th>
+				<th>Output</th>
+				<th>Restock</th>
+				<th>Stock</th>
+			</tr>
+			<tr ng-repeat="meal in $ctrl.meals">
+				<td>{{meal.name}}</td>
+				<td>{{$ctrl.mealPlan(meal.mealPlan).name}}</td>
+				<td>{{$ctrl.portion(meal.portion).name}}</td>
+				<td>{{meal.sku}}</td>
+				<td>{{$ctrl.stockCalculator(meal).forDate($ctrl.date).initial}}</td>
+				<td>{{$ctrl.stockCalculator(meal).forDate($ctrl.date).sales}}</td>
+				<td>{{$ctrl.stockCalculator(meal).forDate($ctrl.date).nonSales}}</td>
+				<td>{{$ctrl.stockCalculator(meal).forDate($ctrl.date).output}}</td>
+				<td>{{$ctrl.stockCalculator(meal).forDate($ctrl.date).restock}}</td>
+				<td>{{$ctrl.stockCalculator(meal).forDate($ctrl.date).stock}}</td>
+			</tr>
+		</table>
+		<div ng-if="$ctrl.view != 'overview'">
+			<table>
+				<tr>
+					<th>Product Name</th>
+					<th>Meal Plan</th>
+					<th>Portion</th>
+					<th>SKU</th>
+					<th>Last Updated</th>
+					<th>{{$ctrl.propName}}</th>
+				</tr>
+				<tr ng-repeat="meal in $ctrl.meals" ng-controller="inventoryStatusItem">
+					<td>{{meal.name}}</td>
+					<td>{{$ctrl.mealPlan(meal.mealPlan).name}}</td>
+					<td>{{$ctrl.portion(meal.portion).name}}</td>
+					<td>{{meal.sku}}</td>
+					<td>{{item.lastUpdated | date:'d MMM yyyy h:mma'}}</td>
+					<td>
+						<input size="3" type="text" ng-model="item.value" ng-disabled="{{$ctrl.pastDay()}}">
+						<button class="-button save" ng-if="item.hasChanges" ng-click="item.save()">Save</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>

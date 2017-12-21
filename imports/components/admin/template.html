@@ -1,0 +1,63 @@
+<div class="header">
+	<h1>Fitness Ration Admin</h1>
+	<login-buttons></login-buttons>
+</div>
+
+<!-- <div class="body" ng-if="$ctrl.user.role == 'admin'">
+ --><div class="body" >
+	<div class="side-nav">
+		<ul class="nav">
+			<li>
+				<a href="/orders" ng-class="{active:$ctrl.page == 'orders'}">Orders</a> (<a href="/orders/add" ng-class="{active:$ctrl.page == 'addOrder'}">Add</a>)
+			</li>
+			<li>
+				Inventory
+				<ul>
+					<li><a href="/inventory/status/overview" ng-class="{active:$ctrl.page == 'inventoryStatus'}">Status</a></li>
+					<li><a href="/inventory/anomaly-triggers" ng-class="{active:$ctrl.page == 'anomalyTriggers'}">Anomaly Triggers</a></li>
+				</ul>
+			</li>
+			<li>
+				Products
+				<ul>
+					<li>
+						<a href="/products/meals" ng-class="{active:$ctrl.page == 'meals'}">Meals</a> (<a href="/products/meals/add" ng-class="{active:$ctrl.page == 'addMeal'}">Add</a>)
+						<ul>
+							<li>
+								<a href="/products/sides" ng-class="{active:$ctrl.page == 'sides'}">Sides</a> (<a href="/products/sides/add" ng-class="{active:$ctrl.page == 'addSide'}">Add</a>)
+							</li>
+							<li>
+								<a href="/products/ingredients" ng-class="{active:$ctrl.page == 'ingredients'}">Ingredients</a> (<a href="/products/ingredients/add" ng-class="{active:$ctrl.page == 'addIngredient'}">Add</a>)
+							</li>
+						</ul>
+					</li>
+					<li><a href="/products/meal-plans" ng-class="{active:$ctrl.page == 'mealPlans'}">Meal Plans</a> (<a href="/products/meal-plans/add" ng-class="{active:$ctrl.page == 'addMealPlan'}">Add</a>)</li>
+					<li><a href="/products/portions" ng-class="{active:$ctrl.page == 'portions'}">Portions</a> (<a href="/products/portions/add" ng-class="{active:$ctrl.page == 'addPortion'}">Add</a>)</li>
+					<li><a href="/products/bundle-types" ng-class="{active:$ctrl.page == 'bundleTypes'}">Bundle Types</a> (<a href="/products/bundle-types/add" ng-class="{active:$ctrl.page == 'addBundleType'}">Add</a>)</li>
+					<li><a href="/products/add-ons" ng-class="{active:$ctrl.page == 'addOns'}">Add-ons</a> (<a href="/products/add-ons/add" ng-class="{active:$ctrl.page == 'addAddOn'}">Add</a>)</li>
+				</ul>
+			</li>
+			<li>
+				Fulfillment
+				<ul>
+					<li><a href="/fulfillment/capacity" ng-class="{active:$ctrl.page == 'fulfillmentCapacity'}">Capacity</a></li>
+					<li><a href="/fulfillment/schedule" ng-class="{active:$ctrl.page == 'fulfillmentSchedule'}">Schedule</a></li>
+					<li><a href="/fulfillment/charges" ng-class="{active:$ctrl.page == 'fulfillmentCharges'}">Charges</a></li>
+					<li><a href="/fulfillment/settings" ng-class="{active:$ctrl.page == 'fulfillmentSettings'}">Settings</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="/promotions" ng-class="{active:$ctrl.page == 'promotions'}">Promotions</a> (<a href="/promotions/add" ng-class="{active:$ctrl.page == 'addPromotion'}">Add</a>)
+			</li>
+			<li><a href="/partners" ng-class="{active:$ctrl.page == 'partners'}">Partners</a> (<a href="/partners/add" ng-class="{active:$ctrl.page == 'addPartner'}">Add</a>)</li>
+			<li><a href="/users" ng-class="{active:$ctrl.page == 'users'}">Users</a></li>
+		</ul>
+	</div>
+	<div class="main">
+		<div class="header">
+			<h1>{{$ctrl.pageTitle}}</h1>
+			<span class="date">{{$ctrl.today | date:'d MMM yyyy'}}</span>
+		</div>
+		<div class="body" ng-init="$ctrl.initMain()"></div>
+	</div>
+</div>

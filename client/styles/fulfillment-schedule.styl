@@ -1,0 +1,70 @@
+@import '_header'
+fulfillmentschedule
+	.calendar.-section
+		.calendar
+			border 1px solid #D9D9D9
+			width 142px*7
+			.header
+				padding 0 10px
+				height 45px
+				border-bottom 1px solid #E6E6E6
+				display flex
+				justify-content space-between
+				align-items center
+			.weekdays, .week
+				display flex
+			.weekdays .weekday, .week .date
+				width 142px
+			.weekdays .weekday
+				text-align center
+				border-bottom 1px solid #E6E6E6
+				height 50px
+				line-height 50px
+				font-size 24px
+				&:not(:last-child)
+					border-right 1px solid #E6E6E6
+			.week
+				&:not(:last-child)
+					border-bottom 1px solid #E6E6E6
+				.date
+					height 78px
+					padding 27px 3px 3px 3px
+					position relative
+					&:not(:last-child)
+						border-right 1px solid #E6E6E6
+					&.other-month
+						background-color #F4F4F4
+						*
+							display none
+					&.today
+						font-weight bold
+						border 3px solid #A0A0A0
+						.number
+							top 3px
+							right 3px
+					&.blocked
+						background-color rgba(208, 2, 27, .3)
+					.number
+						position absolute
+						top 6px
+						right 6px
+						font-size 16px
+						color #A0A0A0
+			.order-summary
+				list-style-type none
+				margin 0
+				padding 0
+				li
+					&:not(:first-child)
+						margin-top 3px
+					padding 0 7px
+					border-radius 20px
+					background-color #F4F4F4
+					font-size 14px				
+					.orders
+						font-weight 500
+	.blocks.-section
+		.-items li
+			position relative
+			.buttons.-group
+				buttons-group()

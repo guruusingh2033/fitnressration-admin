@@ -1,0 +1,24 @@
+<div class="--top">
+	<button class="-button delete" ng-click="$ctrl.delete()">Delete</button>
+	<a class="-button add" href="/products/ingredients/add">Add</a>
+</div>
+<table class="-entry-list">
+	<tr>
+		<th><input ng-model="$ctrl.allSelected" type="checkbox"></th>
+		<th>Icon</th>
+		<th>Name</th>
+		<th>Type</th>
+		<th>Action</th>
+		<th>Surcharge</th>
+		<th></th>
+	</tr>
+	<tr ng-repeat="ingredient in $ctrl.ingredients">
+		<td class="select"><input ng-model="$ctrl.selected[ingredient._id._str]" type="checkbox"></td>
+		<td class="icon"><img src="{{$ctrl.icon(ingredient)}}"></td>
+		<td>{{ingredient.name}}</td>
+		<td>{{ingredient.type}}</td>
+		<td>{{ingredient.action}}</td>
+		<td>{{ingredient.surcharge ? (ingredient.surcharge | currency) : '-'}}</td>
+		<td class="edit"><a class="edit" href="/products/ingredients/{{ingredient._id._str}}/edit">Edit</a></td>
+	</tr>
+</table>

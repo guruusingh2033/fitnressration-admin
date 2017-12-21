@@ -1,0 +1,65 @@
+<form ng-submit="$ctrl.save(); false" ng-model-options="{ updateOn: 'blur' }">
+	<div class="-section images">
+		<ul>
+			<li ng-repeat="image in $ctrl.addOn.images">
+				<img src="{{image}}">
+				<button class="-button delete" type="button" ng-click="$ctrl.removeImage(image)">Delete</button>
+			</li>
+		</ul>
+		<input type="file" upload="$ctrl.addImage(url)">
+	</div>
+	<div class="--cont">
+		<div class="-field">
+			<label>Name</label>
+			<input class="-input" type="text" ng-model="$ctrl.addOn.name" required>
+		</div>
+		<div class="-field">
+			<label>Variant Type</label>
+			<select class="-input" ng-model="$ctrl.addOn.variantType">
+				<option></option>
+				<option value="colour">Colour</option>
+				<option value="variant">Variant</option>
+			</select>
+		</div>
+		<div class="-field">
+			<label>SKU</label>
+			<input class="-input" type="text" ng-model="$ctrl.addOn.sku" required>
+		</div>
+		<div class="-field">
+			<label>Description</label>
+			<textarea class="-input" ng-model="$ctrl.addOn.description" required></textarea>
+		</div>
+		<div class="-field">
+			<label>Specifications</label>
+			<textarea class="-input" ng-model="$ctrl.addOn.specifications" required></textarea>
+		</div>
+		<div class="-field">
+			<label>Price</label>
+			<input class="-input" type="text" ng-model="$ctrl.addOn.price" required>
+		</div>
+		<div class="-section variants">
+			<h2>Variants</h2>
+			<ul class="-items">
+				<li ng-repeat="variant in $ctrl.addOn.variants">
+					<div class="-field">
+						<label>Name</label>
+						<input class="-input" type="text" ng-model="$ctrl.addOn.variants[$index]" placeholder="">
+					</div>
+					<div class="-group buttons">
+						<button class="-button delete" type="button" ng-click="$ctrl.removeVariant($index)">Delete</button>
+					</div>
+				</li>
+				<li>
+					<div class="-field">
+						<label>Name</label>
+						<input class="-input" type="text" ng-model="$ctrl.newVariant">
+					</div>
+					<div class="-group buttons">
+						<button class="-button add" type="button" ng-click="$ctrl.addVariant()">Add</button>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<button class="-button save">Save</button>
+	</div>
+</form>

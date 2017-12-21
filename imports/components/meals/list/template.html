@@ -1,0 +1,46 @@
+<div class="--top">
+	<input class="search" type="text" ng-model="$ctrl.filter">
+	<div class="-group buttons">
+		<button class="-button delete" ng-click="$ctrl.delete()">Delete</button>
+		<a class="-button add" href="/products/meals/add">Add</a>
+	</div>
+</div>
+<table class="-entry-list">
+	<tr>
+		<th><input ng-model="$ctrl.allSelected" type="checkbox"></th>
+		<th>Image</th>
+		<th>Name</th>
+		<th>SKU</th>
+		<th>Meal Plan</th>
+		<th>Portion</th>
+		<th>Grade</th>
+		<th>Ingredients</th>
+		<th>Macros</th>
+		<th></th>
+	</tr>
+	<tr ng-repeat="meal in $ctrl.meals">
+		<td class="select"><input ng-model="$ctrl.selected[meal._id._str]" type="checkbox"></td>
+		<td class="image"><img src="{{meal.primaryImage}}"></td>
+		<td class="name">{{meal.name}}</td>
+		<td class="sku">{{meal.sku}}</td>
+		<td class="meal-plan">{{$ctrl.mealPlan(meal.mealPlan).name}}</td>
+		<td class="portion">{{$ctrl.portion(meal.portion).name}}</td>
+		<td class="grade">{{meal.grade | upperFirst}}</td>
+		<td class="ingredients">
+			<div><label>Main:</label> {{$ctrl.ingredient(meal.mainIngredient).name}}</div>
+			<div ng-if="meal.allergens.length">
+				<label>Allergens:</label>
+				<ul>
+					<li ng-repeat="allergen in meal.allergens">{{$ctrl.ingredient(allergen).name}}</li>
+				</ul>
+			</div>
+		</td>
+		<td class="macros">
+			<div><label>Calories:</label> <span class="value">{{meal.nutritionFacts.calories}} kcal</span></div>
+			<div><label>Carbs:</label> <span class="value">{{meal.nutritionFacts.carbohydrates}} g</span></div>
+			<div><label>Fats:</label> <span class="value">{{meal.nutritionFacts.fat}} g</span></div>
+			<div><label>Protein:</label> <span class="value">{{meal.nutritionFacts.protein}} g</span></div>
+		</td>
+		<td class="edit"><a class="edit" href="/products/meals/{{meal._id._str}}/edit">Edit</a></td>
+	</tr>
+</table>

@@ -1,0 +1,133 @@
+<form ng-submit="$ctrl.add()">
+<div class="-section personal">
+	<h3 class="-header">Personal</h3>
+	<div class="-fields">
+		<div class="-field email">
+			<label>Email</label>
+			<input class="-input" type="text" ng-model="$ctrl.user.email" required>
+		</div>
+		<div class="-field first-name">
+			<label>First name</label>
+			<input class="-input" type="text" ng-disabled="$ctrl.orderUser" ng-model="$ctrl.user.firstName" required>
+		</div>
+		<div class="-field surname">
+			<label>Surname</label>
+			<input class="-input" type="text" ng-disabled="$ctrl.orderUser" ng-model="$ctrl.user.surname" required>
+		</div>
+		<div class="-field phone">
+			<label>Phone</label>
+			<input class="-input" type="text" ng-disabled="$ctrl.orderUser" ng-model="$ctrl.user.phoneNumber" required>
+		</div>
+	</div>
+</div>
+<div class="-section bundles">
+	<h3 class="-header">Bundles</h3>
+	<ul class="-items">
+		<li ng-repeat="bundle in $ctrl.order.bundles" ng-class="{invalid:!$ctrl.bundleValid(bundle)}">
+			<div class="-field">
+				<label>Meal Plan</label>
+				<select class="-input" ng-model="bundle.mealPlan" ng-options="mealPlan.name for mealPlan in $ctrl.mealPlans" required>
+					<option></option>
+				</select>
+			</div>
+			<div class="-field">
+				<label>Portions</label>
+				<select class="-input" ng-model="bundle.portion" ng-options="portion.name for portion in $ctrl.portions" required>
+					<option></option>
+				</select>
+			</div>
+			<div class="-field">
+				<label>Bundle</label>
+				<select class="-input" ng-model="bundle.type" ng-options="bundleType.name for bundleType in $ctrl.bundleTypes | bundleTypes:bundle" required>
+					<option></option>
+				</select>
+			</div>
+			<div class="-section allergies">
+				<h4 class="-header">Allergies</h4>
+				<ul>
+					<li ng-repeat="allergen in $ctrl.allergens">
+						<input class="-input" type="checkbox" ng-model="bundle.allergies[allergen._id._str]"> <label>{{allergen.name}}</label>
+					</li>
+				</ul>
+			</div>
+			<div class="-section meals">
+				<h4 class="-header">Meals</h4>
+				<ul class="-items">
+					<li ng-repeat="mealSelection in bundle.mealSelections">
+						<input class="-input quantity" type="text" ng-model="mealSelection.quantity" placeholder="Quantity" required>
+						<select class="-input" ng-model="mealSelection.meal" ng-options="meal.name for meal in $ctrl.meals | meals:bundle" required>
+							<option></option>
+						</select>
+						<button type="button" class="-button delete" ng-click="$ctrl.removeMeal(bundle, $index)">Remove</button>
+					</li>
+				</ul>
+				<button type="button" class="-button add" ng-click="$ctrl.addMeal(bundle)">Add Meal</button>
+			</div>
+		</li>
+	</ul>
+	<button type="button" class="-button add" ng-click="$ctrl.addBundle()" required>Add Bundle</button>
+</div>
+<div class="-section fulfillment">
+	<h3 class="-header">Fulfillment</h3>
+	<div class="-container">
+		<div class="-group method">
+			<div class="delivery">
+				<input class="-input" type="radio" name="fulfillmentMethod" value="delivery" ng-model="$ctrl.order.deliveryOptions.fulfillmentMethod" required>
+				<label>Delivery</label>
+			</div>
+			<div class="self-collection">
+				<input class="-input" type="radio" name="fulfillmentMethod" value="selfCollection" ng-model="$ctrl.order.deliveryOptions.fulfillmentMethod" required>
+				<label>Self-collection</label>
+			</div>
+		</div>
+		<div class="-field date">
+			<label>Date</label>
+			<input class="-input" ng-focus="$ctrl.showCalendar = true" ng-model="$ctrl.order.deliveryOptions.date" type="text" required>
+			<div class="calendar" ng-if="$ctrl.showCalendar">
+				<div class="header">
+					<button type="button" ng-click="$ctrl.prevMonth()">Prev</button>
+					<button type="button" ng-click="$ctrl.nextMonth()">Next</button>
+					<span class="month">{{$ctrl.monthName($ctrl.month.getMonth())}} {{$ctrl.month.getFullYear()}}</span>
+				</div>
+				<div class="weekdays">
+					<span class="weekday">S</span>
+					<span class="weekday">M</span>
+					<span class="weekday">T</span>
+					<span class="weekday">W</span>
+					<span class="weekday">T</span>
+					<span class="weekday">F</span>
+					<span class="weekday">S</span>
+				</div>
+				<div class="week" ng-repeat="week in $ctrl.weeks">
+					<span class="date" ng-click="$ctrl.selectDate(date)" ng-repeat="date in week" ng-class="{selected:$ctrl.dateSelected(date),'other-month':date.getMonth() != $ctrl.month.getMonth(), today: date.valueOf() == $ctrl.today.valueOf(), available:$ctrl.dateAvailable(date)}">
+						<span class="number">{{date.getDate()}}</span>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="-field time">
+			<label>Time</label>
+			<select class="-input" ng-model="$ctrl.order.deliveryOptions.time" ng-options="$ctrl.timeSlotTitle(timeSlot) for timeSlot in $ctrl.timeSlotsForSelectedDate" required>
+				<option></option>
+			</select>
+		</div>
+		<div class="-field address">
+			<label>Address</label>
+			<textarea class="-input" ng-model="$ctrl.order.deliveryOptions.address" required></textarea>
+		</div>
+		<div class="-field postal-code">
+			<label>Postal Code</label>
+			<input class="-input" type="text" ng-model="$ctrl.order.deliveryOptions.postalCode" required>
+		</div>
+		<div class="-field disposable-cutlery">
+			<input class="-input" type="checkbox" ng-model="$ctrl.order.deliveryOptions.disposableCutlery">
+			<label>Disposable cutlery</label>
+		</div>
+		<div class="-field delivery-note">
+			<label>Delivery note</label>
+			<textarea class="-input" ng-model="$ctrl.order.deliveryOptions.note"></textarea>
+		</div>
+	</div>
+</div>
+<button class="-button save">Save</button>
+</form>

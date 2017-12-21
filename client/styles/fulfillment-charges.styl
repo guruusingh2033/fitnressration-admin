@@ -1,0 +1,20 @@
+@import '_header'
+fulfillmentcharges
+	.last-updated label
+		font-weight bold
+	> div
+		&:not(:first-child)
+			margin-top 30px
+		h2
+			margin 0
+	.free-delivery.-section, .delivery-fee.-section
+		position relative
+		.-input
+			width 100px
+		.buttons.-group
+			buttons-group()
+	.location-surcharges.-section
+		li
+			position relative
+			.buttons.-group
+				buttons-group()

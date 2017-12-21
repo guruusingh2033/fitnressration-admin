@@ -1,0 +1,42 @@
+<p ng-if="$ctrl.loading">Loading...</p>
+<div ng-if="!$ctrl.loading">
+<div class="--top">
+	<input class="search" type="text" ng-model="$ctrl.filter">
+	<button class="-button delete" ng-click="$ctrl.delete()">Delete</button>
+	<a class="-button add" href="/promotions/add">Add</a>
+</div>
+<table>
+	<tr>
+		<th><input ng-model="$ctrl.allSelected" type="checkbox"></th>
+		<th>Name</th>
+		<th>SKU</th>
+		<th>Promo Code</th>
+		<th>Bundle</th>
+		<th>Meal Plan</th>
+		<th>Portion</th>
+		<th>Discount</th>
+		<th>Price Override</th>
+		<th>Promotion Duration</th>
+		<th>Fulfillment Duration</th>
+		<th>Limit</th>
+		<th>Claimed</th>
+		<th></th>
+	</tr>
+	<tr ng-repeat="promotion in $ctrl.promotions">
+		<td class="select"><input ng-model="$ctrl.selected[promotion._id._str]" type="checkbox"></td>
+		<td>{{promotion.name}}</td>
+		<td>{{promotion.sku}}</td>
+		<td>{{promotion.promoCode}}</td>
+		<td>{{promotion.bundleType ? $ctrl.bundleType(promotion.bundleType).name : 'All'}}</td>
+		<td>{{promotion.mealPlan ? $ctrl.mealPlan(promotion.mealPlan).name : 'All'}}</td>
+		<td>{{promotion.portion ? $ctrl.portion(promotion.portion).name : 'All'}}</td>
+		<td>{{promotion.discount}}</td>
+		<td>{{promotion.overridePrice}}</td>
+		<td>{{promotion.start}}&mdash;{{promotion.end}}</td>
+		<td>{{promotion.fulfillmentStart}}&mdash;{{promotion.fulfillmentEnd}}</td>
+		<td>{{promotion.usageLimit ? promotion.usageLimit : 'Unlimited'}}</td>
+		<td>{{$ctrl.claimedCount(promotion)}}</td>
+		<td class="edit"><a class="edit" href="/promotions/{{promotion._id._str}}/edit">Edit</a></td>
+	</tr>
+</table>
+</div>

@@ -1,0 +1,35 @@
+<div class="--top">
+	<input class="search" type="text" ng-model="$ctrl.filter">
+<!-- 	<div class="-group buttons">
+		<button class="-button delete" ng-click="$ctrl.delete()">Delete</button>
+		<a class="-button add" href="/products/meals/add">Add</a>
+	</div>
+ --></div>
+<table class="-entry-list">
+	<tr>
+		<!-- <th><input ng-model="$ctrl.allSelected" type="checkbox"></th> -->
+		<th>Name</th>
+		<th>Email</th>
+		<th>Addresses</th>
+		<th>Phone Number</th>
+		<th></th>
+	</tr>
+	<tr ng-repeat="user in $ctrl.users">
+		<!-- <td class="select"><input ng-model="$ctrl.selected[meal._id._str]" type="checkbox"></td> -->
+		<td>{{user.profile.firstName}} {{user.profile.surname}}</td>
+		<td>{{user.username}}</td>
+		<td class="addresses">
+			<ul>
+				<li ng-repeat="address in user.profile.deliveryAddresses">
+					<span ng-class="{selected:$index == user.profile.selectedDeliveryAddress}">
+						{{address.address}}
+						{{address.postalCode}}
+					</span>
+				</li>
+			</ul>
+		</td>
+		<td>{{user.profile.phoneNumber}}</td>
+		<td class="view"><a href="/users/{{user._id}}">View</a></td>
+		<!-- <td class="edit"><a class="edit" href="/products/meals/{{meal._id._str}}/edit">Edit</a></td> -->
+	</tr>
+</table>

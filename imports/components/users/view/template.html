@@ -1,0 +1,57 @@
+
+<!-- { "_id" : { "$oid" : "f0fdfc7d276c896305a79663" }, "occupation" : "Personal Fitness Trainer", "favoriteActivity" : "Stay at home and chilled.", "careMostAbout" : "my family", "millionDollars" : "Invest it in a overseas private property for passive income!", "goals" : "To Be A Better \"Me\" than yesterday. ", "userId" : "FMaHdAvgPNLrRNTLC" } -->
+<p ng-if="$ctrl.loading">Loading...</p>
+<div ng-if="!$ctrl.loading">
+	<button ng-click="$ctrl.sendResetPasswordEmail()">Send Reset Password Email</button>
+	<div class="-attribute">
+		<label>Email:</label>
+		<span class="-value">{{$ctrl.user.username}}</span>
+	</div>
+	<div class="-attribute">
+		<label>Name:</label>
+		<span class="-value">{{$ctrl.user.profile.firstName}} {{$ctrl.user.profile.surname}}</span>
+	</div>
+	<div class="-attribute">
+		<label>Phone Number:</label>
+		<span class="-value">{{$ctrl.user.profile.phoneNumber}}</span>
+	</div>
+	<div class="-attribute addresses">
+		<label>Addresses:</label>
+		<ul class="addresses">
+			<li ng-repeat="address in $ctrl.user.profile.deliveryAddresses" ng-class="{selected:$index == $ctrl.user.profile.selectedDeliveryAddress}">
+				{{address.address}}
+				{{address.postalCode}}
+			</li>
+		</ul>
+	</div>
+	<div class="-attribute surveys">
+		<label>Surveys:</label>
+		<ul>
+			<li ng-repeat="survey in $ctrl.surveys">
+				<div class="-attribute">
+					<label>Occupation:</label>
+					<span class="-value">{{survey.occupation}}</span>
+				</div>
+				<div class="-attribute">
+					<label>Favourite activity to do on a bright Sunday afternoon:</label>
+					<span class="-value">{{survey.favoriteActivity}}</span>
+				</div>
+				<div class="-attribute">
+					<label>I care most about:</label>
+					<span class="-value">{{survey.careMostAbout}}</span>
+				</div>
+				<div class="-attribute">
+					<label>If I had a million dollars:</label>
+					<span class="-value">{{survey.millionDollars}}</span>
+				</div>
+				<div class="-attribute">
+					<label>My goals are:</label>
+					<span class="-value">{{survey.goals}}</span>
+				</div>
+			</li>
+		</ul>
+	</div>
+
+	<h2>Orders</h2>
+	<orders user-id="$ctrl.userId"></orders>
+</div>

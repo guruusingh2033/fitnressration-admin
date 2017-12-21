@@ -1,0 +1,62 @@
+<div class="-section calendar">
+	<h2>Calendar</h2>
+	<div class="calendar">
+		<div class="header">
+			<button ng-click="$ctrl.prevMonth()">Prev</button>
+			<span class="month">{{$ctrl.monthName($ctrl.month.getMonth())}} {{$ctrl.month.getFullYear()}}</span>
+			<button ng-click="$ctrl.nextMonth()">Next</button>
+		</div>
+		<div class="weekdays">
+			<span class="weekday">Sunday</span>
+			<span class="weekday">Monday</span>
+			<span class="weekday">Tuesday</span>
+			<span class="weekday">Wednesday</span>
+			<span class="weekday">Thursday</span>
+			<span class="weekday">Friday</span>
+			<span class="weekday">Saturday</span>
+		</div>
+		<div class="week" ng-repeat="week in $ctrl.weeks">
+			<span class="date" ng-repeat="date in week" ng-class="{'other-month':date.getMonth() != $ctrl.month.getMonth(), today: date.valueOf() == $ctrl.today.valueOf(), blocked: $ctrl.blocked(date)}">
+				<span class="number">{{date.getDate()}}</span>
+				<ul class="order-summary">
+					<li ng-repeat="line in $ctrl.orderSummaryForDate(date)"><span class="time-slot">{{line.timeSlot}}</span> <span class="orders">{{line.orders}}</span></li>
+				</ul>
+			</span>
+		</div>
+	</div>
+</div>
+<div class="-section blocks">
+	<h2>Blocks</h2>
+	<ul class="-items">
+		<li ng-repeat="block in $ctrl.blocks | editGuard:$ctrl.editGuards:'blocks'">
+			<div class="-field">
+				<label>Start</label>
+				<input class="-input" type="date" ng-model="block.start">
+			</div>
+			<div class="-field">
+				<label>End</label>
+				<input class="-input" type="date" ng-model="block.end">
+			</div>
+			<div class="-group buttons">
+				<button class="-button save" ng-click="$ctrl.save(block)" ng-if="$ctrl.hasChanges(block)">Save</button>
+				<button class="-button cancel" ng-click="$ctrl.cancel(block)" ng-if="$ctrl.hasChanges(block)">Cancel</button>
+				<button class="-button delete" ng-click="$ctrl.delete(block)">Delete</button>
+			</div>
+		</li>
+		<li ng-if="$ctrl.newBlock">
+			<div class="-field">
+				<label>Start</label>
+				<input class="-input" type="date" ng-model="$ctrl.newBlock.start">
+			</div>
+			<div class="-field">
+				<label>End</label>
+				<input class="-input" type="date" ng-model="$ctrl.newBlock.end">
+			</div>
+			<div class="-group buttons">
+				<button class="-button save" ng-click="$ctrl.saveNewBlock()">Save</button>
+				<button class="-button cancel" ng-click="$ctrl.cancelNewBlock()">Cancel</button>
+			</div>
+		</li>
+	</ul>
+</div>
+<button class="-button add" ng-click="$ctrl.addNewBlock()">Add</button>

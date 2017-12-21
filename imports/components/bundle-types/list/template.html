@@ -1,0 +1,34 @@
+<div class="--top">
+	<button class="-button delete" ng-click="$ctrl.delete()">Delete</button>
+	<a class="-button add" href="/products/bundle-types/add">Add</a>
+</div>
+<table class="-entry-list">
+	<tr>
+		<th><input ng-model="$ctrl.allSelected" type="checkbox"></th>
+		<th>Icon</th>
+		<th>Name</th>
+		<th>SKU</th>
+		<th>Grade Ratio</th>
+		<th>Meal Plan</th>
+		<th>Portion</th>
+		<!-- <th>Meal Price</th> -->
+		<th>Price</th>
+		<th>Delivery Fee</th>
+		<th></th>
+	</tr>
+	<tr ng-repeat="bundleType in $ctrl.bundleTypes">
+		<td class="select"><input ng-model="$ctrl.selected[bundleType._id._str]" type="checkbox"></td>
+		<td><img src="{{bundleType.icon | image}}"></td>
+		<td>{{bundleType.name}}</td>
+		<td>{{bundleType.sku}}</td>
+		<td>
+			<div><label>Basic:</label> <span class="value">{{bundleType.basicMeals}}</span></div>
+			<div><label>Premium:</label> <span class="value">{{bundleType.premiumMeals}}</span></div>
+		</td>
+		<td>{{$ctrl.mealPlan(bundleType.mealPlan).name}}</td>
+		<td>{{$ctrl.portion(bundleType.portion).name}}</td>
+		<td>{{bundleType.price | currency}}</td>
+		<td>{{bundleType.deliveryFee ? 'On' : 'Off'}}</td>
+		<td class="edit"><a class="edit" href="/products/bundle-types/{{bundleType._id._str}}/edit">Edit</a></td>
+	</tr>
+</table>

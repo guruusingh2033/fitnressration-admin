@@ -1,0 +1,68 @@
+orders
+	.export.-group
+		display flex
+		justify-content flex-end
+		.-button + .-button
+			margin-left 5px
+	.filters
+		display flex
+		align-content stretch
+		margin-bottom 10px
+		.filter
+			margin-right 10px
+			border-bottom 1px solid #BBBDBF
+			padding 4px
+			.values
+				list-style-type none
+				margin 0
+				padding 0
+				display flex	
+				li
+					display flex
+					align-items center
+					&:not(:first-child)
+						margin-left 5px
+					label
+						cursor pointer
+						margin-right 4px
+					&.active
+						font-weight bold
+	.status
+		background-repeat no-repeat
+		background-position 0px 8px
+		width 70px
+		&.not-flagged
+			font-size 0
+			background-image url(/images/not-flagged.png)
+		&.flagged
+			font-size 0
+			background-image url(/images/flagged.png)
+			
+	.export
+		margin-bottom 10px
+	.fulfillment
+		width 296px
+		.attribute
+			vertical-align top
+			width 170px
+			&.due
+				width 100px
+			display inline-block
+			label
+				display block
+				color #A0A0A0
+		.self-collection
+			color #A0A0A0
+
+	.meal-plans, .portions, .bundle-types, .add-ons
+		white-space nowrap
+		
+	.view
+		width 70px
+		a
+			display block
+			width 30px
+			height 21px
+			background-image url(/images/view.png)
+			font-size 0			
+		

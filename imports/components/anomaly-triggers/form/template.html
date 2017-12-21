@@ -1,0 +1,80 @@
+<form ng-submit="$ctrl.save(); false">
+	<div class="--cont">
+		<div class="-field">
+			<label>Product Type</label>
+			<select ng-model="$ctrl.anomalyTrigger.productType" required>
+				<option></option>
+				<option value="meal">Meal</option>
+				<option value="addOn">Add-on</option>
+			</select>
+		</div>
+		<div ng-if="$ctrl.anomalyTrigger.productType == 'meal'">
+			<div class="-field">
+				<label>Meal</label>
+				<select ng-model="$ctrl.anomalyTrigger.meal" required>
+					<option></option>
+					<option value="all">All</option>
+					<option ng-repeat="mealName in $ctrl.meals | mealNames" value="{{mealName}}">{{mealName}}</option>
+				</select>
+			</div>
+			<div class="-field">
+				<label>Meal Plan</label>
+				<select ng-model="$ctrl.anomalyTrigger.mealPlan._str" required>
+					<option></option>
+					<option value="all">All</option>
+					<option ng-repeat="mealPlan in $ctrl.mealPlans" value="{{mealPlan._id._str}}">{{mealPlan.name}}</option>
+				</select>
+			</div>
+			<div class="-field">
+				<label>Portion</label>
+				<select ng-model="$ctrl.anomalyTrigger.portion._str" required>
+					<option></option>
+					<option value="all">All</option>
+					<option ng-repeat="portion in $ctrl.portions" value="{{portion._id._str}}">{{portion.name}}</option>
+				</select>
+			</div>
+		</div>
+		<div ng-if="$ctrl.anomalyTrigger.productType == 'addOn'">
+			<div class="-field">
+				<label>Add-on</label>
+				<select ng-model="$ctrl.anomalyTrigger.addOn._str" required>
+					<option></option>
+					<option value="all">All</option>
+					<option ng-repeat="addOn in $ctrl.addOns" value="{{addOn._id._str}}">{{addOn.name}}</option>
+				</select>
+			</div>
+		</div>
+		<div class="-field">
+			<label>Trigger limit per order</label>
+			<input type="text" ng-model="$ctrl.anomalyTrigger.quantity" required>
+		</div>
+		<div class="-field">
+			<label>Order fulfillment delay</label>
+			<input type="text" ng-model="$ctrl.anomalyTrigger.delay" required>
+		</div>
+		<div class="-field">
+			<label>Alert title</label>
+			<input type="text" ng-model="$ctrl.anomalyTrigger.alert.title" required>
+		</div>
+		<div class="-field">
+			<label>Alert message</label>
+			<textarea ng-model="$ctrl.anomalyTrigger.alert.message" required></textarea>
+		</div>
+		<div class="-field">
+			<input type="checkbox" ng-model="$ctrl.anomalyTrigger.flagOrder">
+			<label>Flag order</label>
+		</div>
+	</div>
+	<div class="-section order-matching">
+		<div class="-field">
+			<input type="radio" ng-model="$ctrl.anomalyTrigger.matchOrders" name="matchOrders" value="all" required> <label>All orders</label>
+		</div>
+		<div class="-field">
+			<input type="radio" ng-model="$ctrl.anomalyTrigger.matchOrders" name="matchOrders" value="withAllergies" required> <label>Only orders with allergy notes</label>
+		</div>
+	</div>
+	<div class="-group buttons">
+		<button type="button" ng-if="$ctrl.showDelete" class="-button delete" ng-click="$ctrl.delete()">Delete</button>
+		<button class="-button save">{{$ctrl.addButton ? 'Add' : 'Save'}}</button>
+	</div>
+</form>

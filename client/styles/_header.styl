@@ -1,0 +1,22 @@
+icon-field()
+	display block
+	width 173px
+	label
+		display none
+	img
+		display block
+		width 173px
+		height 173px
+		object-fit contain
+buttons-group()
+	position absolute
+	right 10px
+	bottom 10px
+	display flex
+	button + button
+		margin-left 5px
+clear-fix()
+	&:after
+		content ''
+		display block
+		clear both

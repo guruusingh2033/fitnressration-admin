@@ -1,0 +1,59 @@
+@import '_header'
+mealform
+	display block
+	.-field
+		margin-bottom 5px
+	.image.-group
+		float right
+		.-field
+			icon-field()
+			// display block
+			// width 173px
+			// img
+			// 	display block
+			// 	width 173px
+			// 	height 173px
+			// 	object-fit contain
+			& + .-field
+				margin-top 30px
+	.details.-group
+		width 645px
+		.-field
+			label
+				width 100px
+			&.name, &.description
+				.-input
+					flex-grow 1
+			&.meal-plan, &.portion, &.sides, &.grade
+				.-input
+					width 217px
+			&.sides
+				.-input
+					display block
+					margin-bottom 10px
+			&.grade
+				.price.-input
+					margin-left 10px
+					width 100px
+				
+		.meal-plan-portion.-group
+			display flex
+			.portion.-field
+				margin-left 10px
+	.ingredients.-section
+		.-field
+			display inline-flex
+			margin-right 50px
+			> label
+				margin-right 30px
+	.nutrients.-section
+		display flex
+		.-section
+			margin-top 0
+		.-section + .-section
+			margin-left 50px
+		.-field
+			label
+				width 150px
+			.-input
+				margin-right 5px

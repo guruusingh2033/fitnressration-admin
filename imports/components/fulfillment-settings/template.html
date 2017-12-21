@@ -1,0 +1,24 @@
+<div class="-section min-days">
+	<h2>Min Days</h2>
+	<input class="-input" type="text" ng-model="$ctrl.minDays">
+	<div class="last-updated" ng-if="$ctrl.fulfillmentSettingsDoc.timestamps.minDays">
+		<label>Last Updated:</label>
+		<span class="value">{{$ctrl.fulfillmentSettingsDoc.timestamps.minDays | date:'d MMM yyyy h:mma'}}</span>
+	</div>
+	<div class="-group buttons">
+		<button class="-button cancel" ng-click="$ctrl.minDays_cancel()" ng-if="$ctrl.minDays_hasChanges()">Cancel</button>
+		<button class="-button save" ng-click="$ctrl.minDays_save()" ng-if="$ctrl.minDays_hasChanges()">Save</button>
+	</div>
+</div>
+<div class="-section min-days">
+	<h2>Cutoff Time</h2>
+	<input class="-input" type="text" ng-model="$ctrl.cutoffTime">
+	<div class="last-updated" ng-if="$ctrl.fulfillmentSettingsDoc.timestamps.cutoffTime">
+		<label>Last Updated:</label>
+		<span class="value">{{$ctrl.fulfillmentSettingsDoc.timestamps.cutoffTime | date:'d MMM yyyy h:mma'}}</span>
+	</div>
+	<div class="-group buttons">
+		<button class="-button cancel" ng-click="$ctrl.cutoffTime_cancel()" ng-if="$ctrl.cutoffTime_hasChanges()">Cancel</button>
+		<button class="-button save" ng-click="$ctrl.cutoffTime_save()" ng-if="$ctrl.cutoffTime_hasChanges()">Save</button>
+	</div>
+</div>

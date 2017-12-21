@@ -1,0 +1,15 @@
+<form ng-submit="$ctrl.save(); false">
+	<div class="-field icon">
+		<img src="{{$ctrl.mealPlan.icon | image}}">
+		<input type="file" upload="$ctrl.mealPlan.icon = name" upload-type="svg">
+	</div>
+	<div class="-field">
+		<label>Name</label>
+		<input class="-input" type="text" ng-model="$ctrl.mealPlan.name" required>
+	</div>
+	<div class="-field">
+		<label>Description</label>
+		<textarea class="-input" ng-model="$ctrl.mealPlan.description" required></textarea>
+	</div>
+	<button class="-button save">Save</button>
+</form>

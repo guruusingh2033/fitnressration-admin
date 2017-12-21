@@ -1,0 +1,70 @@
+addorder
+	.calendar
+		.weekdays, .week
+			display flex
+		.weekdays .weekday, .week .date
+			display block
+			width 32px
+			height 32px
+			text-align center
+			line-height 32px
+		.weekdays .weekday
+			height 24px
+			line-height 24px
+		.week
+			display flex
+			.date
+				height 32px
+				line-height 32px
+				&.selected
+					border-radius 100%
+					background-color #6A6A6A
+					color white
+				&.available
+					cursor pointer
+				&:not(.available)
+					color gray
+					cursor default
+	.personal
+		.-fields
+			width 700px
+			display flex
+			flex-wrap wrap
+			.-field
+				margin 0 30px 10px 0
+				label
+					width 100px
+				input
+					width 206px
+	.bundles
+		ul
+			margin-bottom 10px
+			> li.invalid
+				border-color red;
+			.meals
+				.quantity
+					width 40px
+	.fulfillment
+		.-container
+			display flex
+			flex-direction column
+			flex-wrap wrap
+			height 200px
+			
+		.method
+			margin-bottom 20px
+		.time
+			margin-bottom 29px
+			
+		.date
+			position relative
+			.calendar
+				position absolute
+				background white
+				z-index 1
+				top 34px
+				left 100px
+							
+		.address, .postal-code, .delivery-note
+			label
+				width 120px

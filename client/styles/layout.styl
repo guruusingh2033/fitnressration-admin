@@ -1,0 +1,140 @@
+@import '_header'
+*
+	box-sizing border-box
+a
+	text-decoration none
+body
+	font-family 'Mission Gothic'
+	font-weight 300
+	// -webkit-font-smoothing antialiased
+	margin 0
+	color #6A6A6A
+input[type="text"], input[type="date"], input[type="month"], input[type="week"]
+	border 1px solid #B7BBC0
+	border-radius 3px
+	padding 3px 5px
+	font-size 20px
+	width 200px
+	font-family 'Mission Gothic'
+textarea
+	height 60px
+	border 1px solid #B7BBC0
+	border-radius 3px	
+	font-size 20px
+	padding 3px 5px
+	font-family 'Mission Gothic'
+ul
+	list-style-type none
+	margin 0
+	padding 0
+.-button
+	padding 0
+	background-color #6A6A6A
+	background-repeat no-repeat
+	background-position 10px center
+	border-width 0
+	border-radius 3px
+	color #E6E6E6
+	width 150px
+	height 40px
+	font-size 24px
+
+	&.add, &.delete, &.save, &.cancel
+		display inline-flex
+		justify-content center
+		align-items center
+		&:before
+			content ''
+			vertical-align middle
+			display inline-block
+			margin-right 8px
+	&.save
+		&:before
+			width 27px
+			height 21px
+			background-image url(/images/save.png)
+	&.cancel
+		&:before
+			width 22px
+			height 21px
+			background-image url(/images/cancel.png)
+	&.add
+		&:before
+			width 16px
+			height 16px
+			background-image url(/images/add.png)
+	&.delete
+		width 52px
+		height 40px
+		font-size 0
+		background #6A6A6A url(/images/delete.png) no-repeat center
+table
+	width 100%
+	border-collapse collapse
+	border-spacing 0
+	border 1px solid #E6E6E6
+	border-width 1px 1px 0
+	border-radius 3px
+	td, th
+		&:not(:first-child)
+			padding-left 10px
+		&:not(:last-child)
+			padding-right 10px
+		&:first-child
+			padding-left 5px
+		&:last-child
+			padding-right 5px
+	th
+		text-align left
+		background-color #F8F8F8
+		white-space nowrap
+		padding 14px 0
+	td
+		border-bottom 1px solid #E6E6E6
+		padding 5px 0
+		vertical-align top
+.-field
+	white-space nowrap
+	display flex
+	select
+		align-self center
+	margin 0 0 10px 0
+	label
+		width 100px
+	.-input	
+		width 206px
+		&[disabled]
+			opacity .5
+	input[type="checkbox"].-input
+		width auto
+		align-self center
+		+ label
+			margin-left 5px
+ul.-items
+	&:not(:last-child)
+		margin-bottom 25px
+	> li
+		&:not(:first-child)
+			margin-top 10px
+		padding 10px
+		border 1px solid #e6e6e6
+		border-radius 3px
+a.edit
+	font-size 0
+	display block
+	width 31px
+	height 25px
+	background url(/images/edit.dark.png)
+input[type="text"].search
+	width 300px
+	background url(/images/search.png) no-repeat center right 9px
+.-group, .-section, .-field, .-items
+	+
+		.-section, .-items
+			&:not(:first-child)
+				margin-top 30px
+.-entry-list
+	td.select
+		width 30px
+	td.edit
+		width 46px

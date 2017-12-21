@@ -1,0 +1,115 @@
+<h2>Time Slots</h2>
+<ul class="-items time-slots">
+	<li ng-repeat="timeSlot in $ctrl.timeSlots | editGuard:$ctrl.editGuards:'timeSlots'">
+		<div class="-section time-block">
+			<h3>Time per day</h3>
+			<div class="-field">
+				<label>Start</label>
+				<select ng-model="timeSlot.start" ng-options="$ctrl.amPm(time) for time in $ctrl.times"></select>
+			</div>
+			<div class="-field">
+				<label>End</label>
+				<select ng-model="timeSlot.end" ng-options="$ctrl.amPm(time) for time in $ctrl.times"></select>
+			</div>
+		</div>
+		<div class="-section days">
+			<h3>Days per week</h3>
+			<div class="-field">
+				<input class="-input" ng-model="timeSlot.days[0]" type="checkbox">
+				<label>Sunday</label>
+			</div>
+			<div class="-field">
+				<input class="-input" ng-model="timeSlot.days[1]" type="checkbox">
+				<label>Monday</label>
+			</div>
+			<div class="-field">
+				<input class="-input" ng-model="timeSlot.days[2]" type="checkbox">
+				<label>Tuesday</label>
+			</div>
+			<div class="-field">
+				<input class="-input" ng-model="timeSlot.days[3]" type="checkbox">
+				<label>Wednesday</label>
+			</div>
+			<div class="-field">
+				<input class="-input" ng-model="timeSlot.days[4]" type="checkbox">
+				<label>Thursday</label>
+			</div>
+			<div class="-field">
+				<input class="-input" ng-model="timeSlot.days[5]" type="checkbox">
+				<label>Friday</label>
+			</div>
+			<div class="-field">
+				<input class="-input" ng-model="timeSlot.days[6]" type="checkbox">
+				<label>Saturday</label>
+			</div>
+		</div>
+		<div class="-section capacity">
+			<h3>Capacity</h3>
+			<div class="-field">
+				<label>Order limit</label>
+				<input ng-model="timeSlot.capacity" type="text">
+			</div>
+		</div>
+		<div class="-group buttons">
+			<button class="-button save" ng-click="$ctrl.save(timeSlot)" ng-if="$ctrl.hasChanges(timeSlot)">Save</button>
+			<button class="-button cancel" ng-click="$ctrl.cancel(timeSlot)" ng-if="$ctrl.hasChanges(timeSlot)">Cancel</button>
+			<button class="-button delete" ng-click="$ctrl.delete(timeSlot)">Delete</button>
+		</div>
+	</li>
+	<li ng-if="$ctrl.newTimeSlot">
+		<div class="-section time-block">
+			<h3>Time per day</h3>
+			<div class="-field">
+				<label>Start</label>
+				<select ng-model="$ctrl.newTimeSlot.start" ng-options="$ctrl.amPm(time) for time in $ctrl.times"></select>
+			</div>
+			<div class="-field">
+				<label>End</label>
+				<select ng-model="$ctrl.newTimeSlot.end" ng-options="$ctrl.amPm(time) for time in $ctrl.times"></select>
+			</div>
+		</div>
+		<div class="-section days">
+			<h3>Days per week</h3>
+			<div class="-field">
+				<input class="-input" ng-model="$ctrl.newTimeSlot.days[0]" type="checkbox">
+				<label>Sunday</label>
+			</div>
+			<div class="-field">
+				<input class="-input" ng-model="$ctrl.newTimeSlot.days[1]" type="checkbox">
+				<label>Monday</label>
+			</div>
+			<div class="-field">
+				<input class="-input" ng-model="$ctrl.newTimeSlot.days[2]"  type="checkbox">
+				<label>Tuesday</label>
+			</div>
+			<div class="-field">
+				<input class="-input" ng-model="$ctrl.newTimeSlot.days[3]"  type="checkbox">
+				<label>Wednesday</label>
+			</div>
+			<div class="-field">
+				<input class="-input" ng-model="$ctrl.newTimeSlot.days[4]"  type="checkbox">
+				<label>Thursday</label>
+			</div>
+			<div class="-field">
+				<input class="-input" ng-model="$ctrl.newTimeSlot.days[5]"  type="checkbox">
+				<label>Friday</label>
+			</div>
+			<div class="-field">
+				<input class="-input" ng-model="$ctrl.newTimeSlot.days[6]"  type="checkbox">
+				<label>Saturday</label>
+			</div>
+		</div>
+		<div class="-section capacity">
+			<h3>Capacity</h3>
+			<div class="-field">
+				<label>Order limit</label>
+				<input ng-model="$ctrl.newTimeSlot.capacity" type="text">
+			</div>
+		</div>
+		<div class="-group buttons">
+			<button class="-button save" ng-click="$ctrl.saveTimeSlot()">Save</button>
+			<button class="-button cancel" ng-click="$ctrl.cancelAdd()">Cancel</button>
+		</div>
+	</li>
+</ul>
+<button class="-button add" ng-click="$ctrl.addTimeSlot()">Add New</button>

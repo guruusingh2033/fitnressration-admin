@@ -1,0 +1,22 @@
+meals
+	.--top
+		margin-bottom 10px
+		display flex
+		.search
+			margin-right auto
+	.buttons.-group
+		display flex
+		.-button + .-button
+			margin-left 5px
+	.image
+		img
+			width 75px
+	.name
+		width 210px	
+	.ingredients, .macros
+		label
+			color #A0A0A0
+		li
+			&:not(:last-child):after
+				content ', '
+			display inline

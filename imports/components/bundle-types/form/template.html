@@ -1,0 +1,56 @@
+<form ng-submit="$ctrl.save(); false">
+	<div class="-field icon">
+		<label>Icon</label>
+		<img src="{{$ctrl.bundleType.icon | image}}">
+		<input class="-input" type="file" upload="$ctrl.bundleType.icon = name" upload-type="svg">
+	</div>
+	<div class="-field">
+		<label>Name</label>
+		<input class="-input" type="text" ng-model="$ctrl.bundleType.name" required>
+	</div>
+	<div class="-field">
+		<label>Description</label>
+		<textarea class="-input" ng-model="$ctrl.bundleType.description" required></textarea>
+	</div>
+	<div class="-field">
+		<label>Meal Plan</label>
+		<select class="-input" ng-model="$ctrl.bundleType.mealPlan._str" required>
+			<option></option>
+			<option ng-repeat="mealPlan in $ctrl.mealPlans" value="{{mealPlan._id._str}}">{{mealPlan.name}}</option>
+		</select>
+	</div>
+	<div class="-field">
+		<label>Portion</label>
+		<select class="-input" ng-model="$ctrl.bundleType.portion._str" required>
+			<option></option>
+			<option ng-repeat="portion in $ctrl.portions" value="{{portion._id._str}}">{{portion.name}}</option>
+		</select>
+	</div>
+	<div class="-field">
+		<label>SKU</label>
+		<input class="-input" type="text" ng-model="$ctrl.bundleType.sku" required>
+	</div>
+	<div class="-section grade">
+		<h2>Grade</h2>
+		<div class="-field">
+			<label>Basic</label>
+			<input class="-input" type="text" ng-model="$ctrl.bundleType.basicMeals" required>
+		</div>
+		<div class="-field">
+			<label>Premium</label>
+			<input class="-input" type="text" ng-model="$ctrl.bundleType.premiumMeals" required>
+		</div>
+	</div>
+	<div class="-section pricing">
+		<h2>Pricing</h2>
+		<div class="-field">
+			<label>Price</label>
+			<input class="-input" type="text" ng-model="$ctrl.bundleType.price" required>
+		</div>
+		<div class="-field">
+			<label>Delivery Fee</label>
+			<input type="checkbox" ng-model="$ctrl.bundleType.deliveryFee">
+		</div>
+	</div>
+	<button class="-button save">Save</button>
+</form>

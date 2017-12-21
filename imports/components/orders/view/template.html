@@ -1,0 +1,127 @@
+<p ng-if="$ctrl.loading">Loading...</p>
+<div ng-if="!$ctrl.loading">
+<button class="-button print-invoice" ng-click="$ctrl.printInvoice()">Print Invoice</button>
+<div class="order-number {{$ctrl.order.flagged ? 'flagged' : 'not-flagged'}}">
+	Order # {{$ctrl.order.number}}
+</div>
+<div class="--top">
+<div class="personal">
+	<h3>Personal</h3>
+	<div class="attribute">
+		<label>Name:</label>
+		<span class="value">{{$ctrl.user.profile.firstName}} {{$ctrl.user.profile.surname}}</span>
+	</div>
+	<div class="attribute">
+		<label>Phone:</label>
+		<span class="value">{{$ctrl.user.profile.phoneNumber}}</span>
+	</div>
+	<div class="attribute">
+		<label>Email:</label>
+		<span class="value">{{$ctrl.user.username}}</span>
+	</div>
+</div>
+<div class="purchase">
+	<h3>Purchase</h3>
+	<div class="bundles">
+		<ul>
+			<li ng-repeat="bundle in $ctrl.order.bundles">
+				<div class="attribute bundle-type">
+					<label>Meal Bundle:</label>
+					<span class="value">
+						{{bundle.type.name}}
+					</span>
+						<span class="price">{{bundle.type.price | currency}}</span>
+				</div>
+				<div class="attribute">
+					<label>Portion:</label>
+					<span class="value">{{bundle.portion.name}}</span>
+				</div>
+				<div class="attribute">
+					<label>Meal Plan:</label>
+					<span class="value">{{bundle.mealPlan.name}}</span>
+				</div>
+				<div ng-if="bundle.promotion" class="attribute">
+					<label>Promo Code:</label>
+					<span class="value">{{bundle.promotion.promoCode}}</span>
+				</div>
+				<div class="meals">
+					<label>Meals:</label>
+					<ul>
+						<li ng-repeat="mealSelection in bundle.mealSelections">
+							<span class="quantity">{{mealSelection.quantity}}</span>
+							<span class="name">{{mealSelection.meal.name}}</span>
+						</li>
+					</ul>
+				</div>
+				<div class="allergies" ng-if="bundle.allergies.length">
+					<label>Allergy:</label>
+					<ul>
+						<li ng-repeat="allergy in bundle.allergies">
+							<span class="quantity">1</span>
+							<span class="title">{{allergy.name}} ({{allergy.action}})</span>
+							<span class="surcharge">{{allergy.surcharge | currency}}</span>
+						</li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="attribute subtotal">
+		<label>Subtotal:</label>
+		<span class="value">{{$ctrl.order.subtotal | currency}}</span>
+	</div>
+</div>
+<div class="fulfillment">
+	<h3>Fulfillment</h3>
+	<div class="attribute">
+		<label>Method:</label>
+		<span class="value">{{$ctrl.order.deliveryOptions.selfCollection ? 'Self Collection' : 'Delivery'}}</span>
+	</div>
+	<div class="attribute">
+		<label>Date:</label>
+		<span class="value">{{$ctrl.order.deliveryOptions.date}}</span>
+	</div>
+	<div class="attribute">
+		<label>Time:</label>
+		<span class="value">{{$ctrl.timeDisplay($ctrl.order.deliveryOptions.time)}}</span>
+	</div>
+	<div class="attribute">
+		<label>Address:</label>
+		<span class="value">{{$ctrl.order.deliveryOptions.address}}<br>{{$ctrl.order.deliveryOptions.postalCode}}</span>
+	</div>
+	<div class="attribute">
+		<label>Disposable cutlery:</label>
+		<span class="value">{{$ctrl.order.deliveryOptions.disposableCutlery ? 'Yes' : 'No'}}</span>
+	</div>
+	<div class="attribute" ng-if="$ctrl.order.deliveryOptions.note">
+		<label>Delivery note:</label>
+		<span class="value">{{$ctrl.order.deliveryOptions.note}}</span>
+	</div>
+	<div class="attribute delivery-fee">
+		<label>Delivery fee:</label>
+		<span class="value">{{$ctrl.order.deliveryFee | currency}}</span>
+	</div>
+</div>
+</div>
+<div class="payment">
+	<h3>Payment</h3>
+	<div class="attribute">
+		<label>Method:</label>
+		<span class="value">Credit Card</span>
+	</div>
+	<div class="attribute">
+		<label>Transaction ID:</label>
+		<span class="value">{{$ctrl.order.transaction.id}}</span>
+	</div>
+	<div class="attribute total">
+		<label>Total:</label>
+		<span class="value">{{$ctrl.order.total | currency}}</span>
+	</div>
+</div>
+<div class="status">
+	<h3>Status</h3>
+	<div class="-field">
+		<input class="-input" type="checkbox" ng-model="$ctrl.flagged"> <label>Flagged</label>
+	</div>
+</div>
+</div>

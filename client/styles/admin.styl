@@ -1,0 +1,70 @@
+@import '_header'
+#login-dropdown-list
+	right -1px
+	left auto
+admin >
+	.header
+		border-bottom 1px solid #B7BBC0
+		padding 0 30px
+		position relative
+		login-buttons
+			position absolute
+			right 30px
+			top 0
+	.body >
+		.side-nav
+			.active
+				font-weight bold
+			&, a
+				color #6A6A6A
+				font-size 20px
+			a
+				text-decoration none
+			position absolute
+			width 230px
+			> .nav
+				margin-top 0
+			background-color #E6E6E6
+			padding 10px 20px 10px 30px
+			ul
+				margin 0
+				padding 0
+				list-style-type none
+				li
+					ul
+						margin-left 10px
+		.main
+			margin-left 230px
+			> .header
+				clear-fix()
+				border-bottom 1px solid #E6E6E6
+				padding 20px 40px 58px
+				margin-bottom 30px
+				.date
+					float right
+					font-size 36px
+				h1
+					float left
+					margin 0
+					font-weight normal
+					font-size 36px
+			> .body
+				border 1px solid #B7BBC0
+				padding 20px
+				margin 30px
+				border-radius 3px
+				font-size 20px
+				&:after
+					content ''
+					clear both
+					display block
+				h2
+					font-size 24px
+				h2, h3, h4
+					&:first-child
+						margin-top 0
+					margin-bottom 5px
+					font-weight normal
+
+				.--top
+					margin-bottom 10px

@@ -1,0 +1,96 @@
+<form ng-submit="$ctrl.save()">
+	<div class="-field">
+		<label>Name</label>
+		<input ng-model="$ctrl.promotion.name" type="text" required>
+	</div>
+	<div class="-field">
+		<label>Meal Plan</label>
+		<select ng-model="$ctrl.promotion.mealPlan._str" required>
+			<option></option>
+			<option value="all">All</option>
+			<option ng-repeat="mealPlan in $ctrl.mealPlans" value="{{mealPlan._id._str}}">{{mealPlan.name}}</option>
+		</select>
+	</div>
+	<div class="-field">
+		<label>Portion</label>
+		<select ng-model="$ctrl.promotion.portion._str" required>
+			<option></option>
+			<option value="all">All</option>
+			<option ng-repeat="portion in $ctrl.portions" value="{{portion._id._str}}">{{portion.name}}</option>
+		</select>
+	</div>
+	<div class="-field">
+		<label>Meal Bundle</label>
+		<select ng-model="$ctrl.promotion.bundleType._str" required>
+			<option></option>
+			<option value="all">All</option>
+			<option ng-repeat="bundleType in $ctrl.bundleTypes | bundleTypes2:$ctrl.promotion" value="{{bundleType._id._str}}">{{bundleType.name}}</option>
+		</select>
+	</div>
+	<div class="-field">
+		<label>SKU</label>
+		<input ng-model="$ctrl.promotion.sku" type="text" required>
+	</div>
+	<div class="-field">
+		<label>Promo Code</label>
+		<input ng-model="$ctrl.promotion.promoCode" type="text" required>
+	</div>
+	<div class="-field">
+		<input class="-input" type="checkbox" ng-model="$ctrl.promotion.limitedUsage">
+		<label>Limit</label>
+		<input class="-input" type="text" ng-if="$ctrl.promotion.limitedUsage" ng-model="$ctrl.promotion.usageLimit" required>
+	</div>
+	<div class="-section pricing">
+		<h2>Pricing</h2>
+		<div class="-field">
+			<input name="pricingType" ng-model="$ctrl.promotion.type" value="override" type="radio" required>
+			<label>Override</label>
+			<input ng-model="$ctrl.promotion.overridePrice" ng-if="$ctrl.promotion.type == 'override'" type="text" placeholder="eg. 49.99 (for $49.99)" required>
+		</div>
+		<div class="-field">
+			<input name="pricingType" ng-model="$ctrl.promotion.type" value="discount" type="radio" required>
+			<label>Discount</label>
+			<input ng-model="$ctrl.promotion.discount" ng-if="$ctrl.promotion.type == 'discount'" type="text" placeholder="eg. 20 (for 20%)" required>
+		</div>
+		<div class="-field">
+			<input ng-model="$ctrl.promotion.deliveryFee" type="checkbox">
+			<label>Delivery fee</label>
+		</div>
+	</div>
+	<div class="-section premium-meals">
+		<h2>Premium Meals</h2>
+		<div class="-field">
+			<input class="-input" type="checkbox" ng-model="$ctrl.promotion.hasPremiumAllowance">
+			<label>Allowance</label>
+			<input class="-input" ng-if="$ctrl.promotion.hasPremiumAllowance" ng-model="$ctrl.promotion.premiumAllowance" type="text" required>
+		</div>
+		<div class="-field">
+			<input class="-input" type="checkbox" ng-model="$ctrl.promotion.hasPremiumCap">
+			<label>Cap</label>
+			<input class="-input" ng-if="$ctrl.promotion.hasPremiumCap" ng-model="$ctrl.promotion.premiumCap" type="text" required>
+		</div>
+	</div>
+	<div class="-section promo-duration">
+		<h2>Promo Duration</h2>
+		<div class="-field">
+			<label>Start</label>
+			<input ng-model="$ctrl.promotion.start" type="date" required>
+		</div>
+		<div class="-field">
+			<label>End</label>
+			<input ng-model="$ctrl.promotion.end" type="date" required>
+		</div>
+	</div>
+	<div class="-section fulfillment-duration">
+		<h2>Fulfillment Duration</h2>
+		<div class="-field">
+			<label>Start</label>
+			<input ng-model="$ctrl.promotion.fulfillmentStart" type="date">
+		</div>
+		<div class="-field">
+			<label>End</label>
+			<input ng-model="$ctrl.promotion.fulfillmentEnd" type="date">
+		</div>
+	</div>
+	<button class="-button save">Save</button>
+</form>

@@ -1,0 +1,22 @@
+<div class="--top">
+	<button class="-button delete" ng-click="$ctrl.delete()">Delete</button>
+	<a class="-button add" href="/partners/add">Add</a>
+</div>
+<table class="-entry-list">
+	<tr>
+		<th><input ng-model="$ctrl.allSelected" type="checkbox"></th>
+		<th>Image</th>
+		<th>Name</th>
+		<th>Type</th>
+		<th>Members</th>
+		<th></th>
+	</tr>
+	<tr ng-repeat="partner in $ctrl.partners">
+		<td class="select"><input ng-model="$ctrl.selected[partner._id._str]" type="checkbox"></td>
+		<td><img src="{{partner.image}}"></td>
+		<td>{{partner.name}}</td>
+		<td>{{partner.type}}</td>
+		<td>{{partner.members}}</td>
+		<td class="edit"><a class="edit" href="/partners/{{partner._id._str}}/edit">Edit</a></td>
+	</tr>
+</table>
